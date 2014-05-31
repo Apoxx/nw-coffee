@@ -1,0 +1,39 @@
+{
+  "name": "nw-coffee",
+  "version": "0.0.1",
+  "author": {
+    "name": "Apox"
+  },
+  "description": "A module that let you use coffeescript easily with node-webkit.",
+  "main": "nw-coffee.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Apoxx/nw-coffee.git"
+  },
+  "keywords": [
+    "coffeescript",
+    "coffee-script",
+    "browserify",
+    "node-webkit",
+    "node",
+    "webkit"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "browserify": "^4.1.6",
+    "coffee-script": "^1.7.1",
+    "coffeeify": "^0.6.0"
+  },
+  "readme": "nw-coffee\n=========\n\nA module that let you use coffeescript easily with node-webkit.\n\n### How to use\n\n```html\n <script type=\"text/javascript\">\n    require(\"nw-coffee\")(\"./src/app.coffee\");\n </script>\n```\n\n`./src/app.coffee` is the entry point of your app. From here you can use `require()` to import commonjs modules in the webkit context and `requireNode()` to import module in the node context.\n\nThis module uses browserify and coffeeify under the hood to import modules in webkit.\n\nAll the operations are made on the fly when you reaload node-webkit. You should thus not keep this in production but pre-compile files instead.\n\nSourcemaps are enabled (sometimes it does not show after startup but it works after a refresh).",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/Apoxx/nw-coffee/issues"
+  },
+  "homepage": "https://github.com/Apoxx/nw-coffee",
+  "_id": "nw-coffee@0.0.1",
+  "_shasum": "f08180338f78e5fa9cd956127be2b88d12fcbff4",
+  "_from": "nw-coffee@"
+}
