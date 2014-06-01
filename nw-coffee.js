@@ -89,23 +89,32 @@
   }
 
   module.exports = function(entry){
-   var requireFix = "window.requireNode = require;"
-   var browserify = require('browserify');
-   var b = browserify({extensions : ['.coffee']});
-   b.add(entry);
-   var opts = {
-    insertGlobals : false,
-    detectGlobals : false,
-    debug: true
+    var dataurl = require("dataurl");
+    var browserify = require('browserify');
+    var b = browserify({extensions : ['.coffee']});
+    b.add(entry);
+    var opts = {
+      insertGlobals : false,
+      detectGlobals : false,
+      debug: true
+    };
+    b.transform('coffeeify');  
+    var stream = dataurl.stream({mimetype : "text/javascript"});
+    var encodedBundle = "";
+    stream.on('data', function(data){
+      encodedBundle += data;
+    });
+    stream.on('end', function(){
+      var doc = global.window.document;
+      var script = doc.createElement("script");
+      script.type = "text/javascript";
+      script.src = encodedBundle;
+      doc.body.appendChild(script);
+    });
+    stream.write("window.requireNode = require;");
+    b.bundle(opts, function(err){
+      if(err)
+        console.log(err.toString());
+    }).pipe(stream);
   };
-  b.transform('coffeeify');
-  b.bundle(opts, function(err,data){
-    if(err)
-      console.log(err.toString());
-    else{
-      window.eval(requireFix);
-      window.eval(data);
-    }
-  });
-}
 }).call(this);
