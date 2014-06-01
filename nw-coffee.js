@@ -111,7 +111,7 @@
       script.src = encodedBundle;
       doc.body.appendChild(script);
     });
-    stream.write("window.requireNode = require;");
+    stream.write("global.requireNode = window.requireNode = require;");
     b.bundle(opts, function(err){
       if(err)
         console.log(err.toString());
