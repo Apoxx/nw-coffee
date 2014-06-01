@@ -90,15 +90,15 @@
 
   module.exports = function(entry){
     var dataurl = require("dataurl");
-    var browserify = require('browserify');
-    var b = browserify({extensions : ['.coffee']});
-    b.add(entry);
+    var watchify = require('watchify');
+    var w = watchify({extensions : ['.coffee']});
+    w.add(entry);
     var opts = {
       insertGlobals : false,
       detectGlobals : false,
       debug: true
     };
-    b.transform('coffeeify');  
+    w.transform('coffeeify');  
     var stream = dataurl.stream({mimetype : "text/javascript"});
     var encodedBundle = "";
     stream.on('data', function(data){
@@ -111,8 +111,11 @@
       script.src = encodedBundle;
       doc.body.appendChild(script);
     });
+    w.on('update', function(){
+      global.window.location.reload();
+    });
     stream.write("global.requireNode = window.requireNode = require;");
-    b.bundle(opts, function(err){
+    w.bundle(opts, function(err){
       if(err)
         console.log(err.toString());
     }).pipe(stream);
