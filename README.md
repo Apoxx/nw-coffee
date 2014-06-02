@@ -7,7 +7,7 @@ A module that let you use coffeescript easily with node-webkit.
 
 ```html
  <script type="text/javascript">
-    require("nw-coffee")("./src/app.coffee");
+ 	require('nw-coffee')('./src/app.coffee',{reload: true});
  </script>
 ```
 

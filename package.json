@@ -1,11 +1,11 @@
 {
   "name": "nw-coffee",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "author": {
     "name": "Apox"
   },
   "description": "A module that let you use coffeescript easily with node-webkit.",
-  "main": "nw-coffee.js",
+  "main": "bin/nw-coffee.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
